@@ -1,0 +1,36 @@
+
+/* 
+  - Naive  sol requires extra space 
+  - efficient sol  -> take idea from the problem sort array with two diff elements 
+     first you try to sort the first element then you are left with 2 diff elements then you do the same thing again..
+     This comes from the idea of treating 3 diff elements as two elements for exaple in 0 ,1 , 2 we treat 0 as an element and (1,2) togenther as an element...
+  - The above sol takes O(n) time but it takes 2 complete iterations so we can go still eff
+  -  Dutch National flag ALGO...
+
+      0   low   mid   (UNKNOWNS)   hi   n-1
+  
+*/
+
+public static void sort3Elements(int arr[])
+	{
+		// Dutch national flag algorithm...
+		
+		int n = arr.length;
+		int l = 0 , mid = 0 , hi = n-1;
+		
+		while(mid <= hi)
+		{
+			if (arr[mid] == 0) {
+				swap(arr , l, mid );
+				mid++;
+				l++;
+			}
+			else if (arr[mid] == 1)
+			{
+				mid++;
+			}
+			else {
+				swap(arr , mid, hi);
+				hi--;
+			}
+		}
