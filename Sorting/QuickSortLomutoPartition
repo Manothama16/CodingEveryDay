@@ -1,0 +1,32 @@
+
+//  partition based on the first element of the array ...
+public static int lomutoPartition(int arr[] , int l , int h)
+	{
+		 int res = l;
+		 int pivot  = arr[l];
+		 int track_pivot = l;
+		 
+		 for(int i = l; i <= h ; i++)
+		 {
+			 if(arr[i] < pivot)
+			 {	
+				 int temp = arr[i];
+				 arr[i] = arr[res];
+				 arr[res] = temp;
+				res++;
+				track_pivot = i;
+			 }
+			 else {
+				 continue;
+			 }
+			 System.out.println(Arrays.toString(arr));
+		 }
+		 
+		 if(arr[res] != pivot)
+		 {
+			 int temp = arr[res];
+			 arr[res] = arr[track_pivot];
+			 arr[track_pivot] = temp;
+		 }
+		 return res;	
+	}
