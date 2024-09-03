@@ -1,1 +1,24 @@
+// The idea is the increase the counter if a person arrives at the home else decrease the counter , take the max of counter and curr_max for the result...
 
+public static int maxGuests(int arr[] , int dep[])
+	{
+		int res = 0 , ans = 0;
+		Arrays.sort(arr);
+		Arrays.sort(dep);
+		int i = 0 , j = 0 , n = arr.length;
+
+		while( i < n && j < n)
+		{
+			if(arr[i] <= dep[j])
+			{
+				res++;
+				i++;
+			}
+			else {
+				res--;
+				j++;
+			}
+		}		
+		ans = Math.max(ans, res);
+		return ans;
+	}
