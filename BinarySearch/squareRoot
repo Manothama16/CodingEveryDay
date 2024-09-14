@@ -1,1 +1,57 @@
+// Navie soln that takes sqrt n time 
+publicstatic int squareRoot(int n)
+	{
+		int res = 0;
+		
+		for(int i = 1 ; i*i <= n ; i++ ) 
+		{
+			if(i*i == n)
+			{
+				return i;
+			}
+			res++;
+		}
+		
+		return res;
+	}
+	
+	// eff soln that takes logn time complexity
+	// idea is to just apply binary search...
 
+	public static int squareRootEff(int n)
+	{	
+		if(n ==0 || n == 1)
+		{
+			return n;
+		}
+		
+		int low = 1;
+		int high = n;
+		
+		while(low <= high)
+		{
+			int mid = low + (high - low)/2;
+			if(mid > 1)
+			{
+				if((mid*mid == n))
+				{
+					return mid;
+				}
+				else if(((mid-1)*(mid-1) < n) && (mid*mid > n))
+				{
+					return mid-1;
+				}
+			}
+			
+			if(mid*mid > n) {
+				high = mid -1;
+			}
+			else if(mid*mid < n)
+			{
+				low = mid+1;
+			}
+		}
+		
+		return -1;
+	}
+	
