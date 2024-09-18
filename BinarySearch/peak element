@@ -1,0 +1,28 @@
+public static int peakElement(int arr[])
+	{
+		int low = 0 , high = arr.length -1;
+		while(low <= high)
+		{
+			int mid = low + (high - low)/2;
+			if( (mid == 0 || arr[mid -1] <= arr[mid]) && (mid == arr.length-1 || arr[mid+1] <= arr[mid]) )
+			{
+				return mid;
+			}
+			else if (mid > 0 && arr[mid-1] >= arr[mid])
+			{
+				high = mid -1;
+			}
+			else {
+				 low = mid+1;
+			}	
+		}
+		
+		return -1;
+	}
+
+ // idea is that  if arr[mid -1 ] >= arr[mid] we always look for the left half of the array else we look into right half.
+ //  let's say we have satisfied with the arr[mid -1] >= arr[mid] condition for the array  10 30 25 44 90
+ //  now the mid element is 25 mid-1 element is 30 
+ //  now the element left of 30 can either be greater than 30 or less than it 
+ // if it's less than then we have res as 30 else if it's greater then the array looks like 60 30 25 44 90 , 
+ // still 60 is a peak element which we will reach eventually...
