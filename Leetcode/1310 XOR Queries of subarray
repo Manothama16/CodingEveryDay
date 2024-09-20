@@ -1,0 +1,43 @@
+- > You are given an array arr of positive integers. You are also given the array queries where queries[i] = [lefti, righti].
+    For each query i compute the XOR of elements from lefti to righti (that is, arr[lefti] XOR arr[lefti + 1] XOR ... XOR arr[righti] ).
+    Return an array answer where answer[i] is the answer to the ith query.
+    
+
+class Solution {
+    public int[] xorQueries(int[] arr, int[][] queries) {
+        
+        int n = arr.length;
+        int prexor[] = new int[n];
+        int res[] = new int[queries.length];
+
+        prexor[0] = arr[0];
+
+        for(int i = 1 ; i < n ; i++)
+        {
+            prexor[i] = prexor[i-1]^arr[i];
+        }
+
+        for(int i = 0 ; i < res.length ; i++)
+        {
+            if(queries[i][0] == 0)
+            { 
+                res[i] = prexor[queries[i][1]];
+            }
+            else{
+                if(queries[i][0] == queries[i][1])
+                {
+                    res[i] = arr[queries[i][1]];
+                }
+                else{
+                    res[i] = prexor[queries[i][1]] ^ prexor[queries[i][0] - 1];
+                }
+            }
+        }
+
+
+        return res;
+
+    }
+}
+
+// logic begind this code comes from this condition - > a^b...^x = y ; b^c...^y = a ; 
