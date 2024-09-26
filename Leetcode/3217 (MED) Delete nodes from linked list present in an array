@@ -1,0 +1,30 @@
+lass Solution {
+    public ListNode modifiedList(int[] nums, ListNode head) {
+        
+        HashSet<Integer> hs = new HashSet<>();
+        ListNode x = new ListNode(0);
+        ListNode y = x , res = x;
+        
+        x.next = head;
+        x = x.next;
+
+        for(int i : nums) 
+        {   
+            hs.add(i);
+        }   
+
+        while(x != null)
+        {
+            if(hs.contains(x.val))
+            {
+                y.next = x.next;
+            }
+            else{
+                y = y.next;
+            }
+            x = x.next;
+        }
+
+        return res.next;
+    }
+}
