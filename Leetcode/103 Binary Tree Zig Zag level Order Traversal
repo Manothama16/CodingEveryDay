@@ -1,0 +1,58 @@
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        if(root == null) return new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int flag = 0;
+        while(!queue.isEmpty())
+        {
+            int size = queue.size();
+            Stack<TreeNode> st = new Stack();
+            List<Integer> li = new ArrayList<>();
+            if(flag == 0){
+                for(int i = 0; i < size ; i++)
+                {
+                    TreeNode temp  = queue.poll();
+                    li.add(temp.val);
+                    if(temp.left != null) queue.add(temp.left);
+                    if(temp.right != null) queue.add(temp.right);
+                }
+                res.add(li);
+                flag = 1;
+            }
+            else{
+                for(int i = 0; i < size ; i++)
+                {
+                    TreeNode temp  = queue.poll();
+                    st.push(temp);
+                    if(temp.left != null) queue.add(temp.left);
+                    if(temp.right != null) queue.add(temp.right);
+                }
+                reverse(new LinkedList<>(), st , li);
+                res.add(li);
+                flag = 0;
+            }
+        }
+        return res;
+    }
+    
+    // if the direction is changed then add elements into the stack then pass into the queue , this helps in reversal of elements..
+    public static void reverse(Queue<TreeNode> queue , Stack<TreeNode> st , List<Integer> li)
+    {
+        while(!st.isEmpty())
+        {
+            TreeNode helper = st.pop();
+            queue.add(helper);
+        }
+        while(!queue.isEmpty())
+        {
+            TreeNode helper = queue.poll();
+            li.add(helper.val);
+        }
+    }
+}
+
+Note : 
+The above code is tiresome for typing , how about using a linked list instead of a stack ?? It cutdowns the helper function.
+hint - > using addFirst() , addLast() does the job ig..
